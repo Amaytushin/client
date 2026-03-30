@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блогийн мэдээлэл</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        h2 { color: #333; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f2 1f2f2; }
+        tr:hover { background-color: #ddd; }
+        .no-data { text-align: center; padding: 20px; color: #666; }
+    </style>
+</head>
+<body>
+
+    <h2>Нийт нийтлэлүүдийн жагсаалт</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Гарчиг (Title)</th>
+                <th>Агуулга (Content)</th>
+                <th>Огноо (Date)</th>
+                <th>Зохиогч (Author)</th>
+                <th>Ангилал (Category)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.content|truncatechars:50 }}</td>
+                <td>{{ post.date|date:"Y-m-d H:i" }}</td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.category.name }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="no-data">Одоогоор мэдээлэл байхгүй байна.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
